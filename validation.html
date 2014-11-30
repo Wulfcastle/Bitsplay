@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Validation - Bitsplay</title>
+	<meta charset="utf-8" />
+
+	<meta name="viewport" content="width=device-width" />
+
+	<link rel="shortcut icon" href="./css/images/favicon.ico" />
+	<link href='../../fonts.googleapis.com/css_58f6679e.css' rel='stylesheet' type='text/css' />
+	<link rel="stylesheet" href="./css/style.css" />
+
+	<script src="./js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<!--[if lte IE 8]>
+		<script src="./js/modernizr.js" type="text/javascript"></script>
+	<![endif]-->
+	<!--[if IE 6]>
+		<script src="./js/DD_belatedPNG_0.0.8a-min.js" type="text/javascript"></script>
+	<![endif]-->
+	<script src="./js/jquery.event.drag.js" type="text/javascript"></script>
+	<script src="./js/jquery.event.drop.js" type="text/javascript"></script>
+	<script src="./js/jquery.roundabout.min.js" type="text/javascript"></script>
+	<script src="./js/jquery.touchSwipe.min.js" type="text/javascript"></script>
+	<script src="./js/jquery.caroufredsel.js" type="text/javascript"></script>
+	<script src="./js/jquery.tweet.js" type="text/javascript"></script>
+	<script src="./js/functions.js" type="text/javascript"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></head>
+<body>
+
+<div id="wrapper">
+	<header id="header">
+		<div class="shell">
+			<section class="header-top">
+				<h1 id="logo"><a href="./home.html#"><img src="./css/images/bitsplay.png" alt="Bitsplay" /></a></h1>
+
+				<nav id="navigation">
+					<ul> 
+						<li><a href="./about.html">About</a></li>
+						<li><a href="./create.html">Create Game</a></li>
+						<li class="active"><a href="./validation.html">Validation</a></li>
+						<li><a href="./contact.html">Contact</a></li>
+						<li><a href="./play.html" class="sign-btn">Play</a></li>
+					</ul>
+				</nav>
+				<!-- /navigation -->
+			</section>
+			<!-- /header-top -->
+
+		</div>
+	</header>
+	<!-- /header -->
+
+	<header class="page-title">
+		<div class="shell">
+			<h2><i>Validation</i></h2>
+		</div>
+	</header>
+
+	<section class="container">
+		
+		<section class="project-desc">
+			<div class="shell">
+				<section class="cnt">
+					<article>
+						<h2>Want some Proof?</h2>
+						<p>We've made a PHP script for you to run which proves that all games are undeniably fair.</p>
+					<center><img src="css/images/validation.png"></center>
+					</article>
+
+					<article>
+						<h2>But don't take our word for it.</h2>
+						<p>Run the sript and see the results with your own eyes.</p>
+					</article>
+				</section>
+
+				<aside class="project-sidebar">
+					<ul><center>
+						<li>
+							<h5>Scrypt Type:</h5>
+							<p>PHP</p>
+						</li>
+
+						<li>
+							<h5>Size and Length:</h5>
+							<p>1KB / 10 Lines</p>
+						</li>
+
+						<li>
+							
+							<a class="btn blue-btn" href="https://www.dropbox.com/s/vbx2zc0p3bxgtgv/script.php">Download</a>
+						</li></center>
+					</ul>
+				</aside>
+			</div>
+						<div class="shell">
+				<style type="text/css" media="screen">
+
+    .ace_editor {
+        position: relative !important;
+        border: 1px solid lightgray;
+        margin: auto;
+        height: 400px;
+        width: 100%;
+    }
+
+    .ace_editor.fullScreen {
+        height: auto;
+        width: auto;
+        border: 0;
+        margin: 0;
+        position: fixed !important;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        background: white;
+    }
+
+    .fullScreen {
+        overflow: hidden
+    }
+
+    .scrollmargin {
+        height: 500px;
+        text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+<pre id="editor"><code>
+&lt;?php
+function checkMyResult($tx, $seed, $gamename, $mess = "null") {
+    $hash = sha1($tx.$seed.$gamename.$mess);
+    
+    $value = substr($hash, 0, 10);
+    $dice = round(hexdec($value)/4294967295,5);
+    
+    echo "{$hash} - {$dice}";
+}
+?></code></pre>
+   <center> <div style="padding:20px;">
+        press F11 to switch to fullscreen mode
+    </div>
+	<a class="btn" href="play.html#">Play Now</a>
+</center>
+<script src="ace-builds/src/ace.js" type="text/javascript" charset="utf-8"></script>
+<script>
+var $ = document.getElementById.bind(document);
+var dom = require("ace/lib/dom");
+
+//add command to all new editor instaces
+require("ace/commands/default_commands").commands.push({
+    name: "Toggle Fullscreen",
+    bindKey: "F11",
+    exec: function(editor) {
+        dom.toggleCssClass(document.body, "fullScreen")
+        dom.toggleCssClass(editor.container, "fullScreen")
+        editor.resize()
+    }
+}, {
+    name: "add",
+    bindKey: "Shift-Return",
+    exec: add
+})
+
+// create first editor
+var editor = ace.edit("editor");
+editor.setTheme("ace/theme/twilight");
+editor.session.setMode("ace/mode/php");
+editor.session.getTextRange(editor.getSelectionRange());
+
+
+var count = 1;
+function add() {
+    var oldEl = editor.container
+    var pad = document.createElement("div")
+    pad.style.padding = "40px"
+    oldEl.parentNode.insertBefore(pad, oldEl.nextSibling)
+
+    var el = document.createElement("div")
+    oldEl.parentNode.insertBefore(el, pad.nextSibling)
+
+    count++
+    var theme = "ace/theme/" + themes[Math.floor(themes.length * Math.random() - 1e-5)]
+    editor = ace.edit(el)
+    editor.setTheme(theme)
+    editor.session.setMode("ace/mode/php")
+	
+
+    editor.setValue([
+        "this is editor number: ", count, "\n",
+        "using theme \"", theme, "\"\n",
+        ":)"
+    ].join(""), -1)
+
+    scroll()
+}
+
+
+function scroll(speed) {
+    var top = editor.container.getBoundingClientRect().top
+    speed = speed || 10
+    if (top > 60 && speed < 500) {
+        if (speed > top - speed - 50)
+            speed = top - speed - 50
+        else
+            setTimeout(scroll, 10, speed + 10)
+        window.scrollBy(0, speed)
+    }
+}
+
+var themes = {
+    bright: [ "chrome", "clouds", "crimson_editor", "dawn", "dreamweaver", "eclipse", "github",
+        "solarized_light", "textmate", "tomorrow"],
+    dark: [ "clouds_midnight", "cobalt", "idle_fingers", "kr_theme", "merbivore", "merbivore_soft",
+        "mono_industrial", "monokai", "pastel_on_dark", "solarized_dark",  "tomorrow_night",
+        "tomorrow_night_blue", "tomorrow_night_bright", "tomorrow_night_eighties", "twilight", "vibrant_ink"]
+}
+themes = [].concat(themes.bright, themes.dark)
+setTimeout(function(){ window.scrollTo(0,0) }, 10)
+</script>
+			</div>
+		</section>
+		<!-- /project-desc -->
+		<nav class="projects-nav">
+			<div class="shell">
+				<a href="index.html#" class="nav-link prev-link"><span></span>Home</a>
+				<a href="#navigation" class="back-link">Back to Menu</a>
+				<a href="play.html#" class="nav-link next-link"><span></span>Play</a>
+			</div>
+		</nav>
+		<!-- /projects-nav -->
+
+	</section>
+	<!-- /container -->
+	<div id="footer-push"></div>
+</div>
+<!-- /wrapper -->
+
+<footer>
+	<div class="shell">
+		<section class="footer-cnt clearfix">
+			<div class="col">
+				<h5>MAIN</h5>
+				<ul>
+					<li><a href="./about.html">About</a></li>
+						<li><a href="./create.html">Create Game</a></li>
+						<li><a href="./validation.html">Validation</a></li>
+						<li><a href="./contact.html">Contact</a></li>
+						<li><a href="./play.html" class="sign-btn">Play</a></li>
+				</ul>
+			</div>
+
+			
+		</section>
+
+			<nav class="social-nav">
+			<a href="twitter.com" class="twitter-ico">twitter</a>
+			<a href="facebook.com" class="facebook-ico">facebook</a>
+		</nav>
+
+		<p class="copy">
+			&copy; 2013 Bitsplay<br />
+
+		</p>
+	</div>
+</footer>
+<!-- /footer -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','../../www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-39822414-1', 'agthemes.com');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>
